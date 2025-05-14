@@ -1,0 +1,31 @@
+def line(size = 42):
+    """
+    Returns a line of dashes of a given size.
+    :param size: The size of the line.
+    :return: A string of dashes of the given size.
+    """
+    return "-" * size
+
+def header(text):
+    """
+    Prints a header with a given text.
+    :param text: The text to be printed as a header.
+    """
+    print(line())
+    print(text.center(42))
+    print(line())
+
+def menu(list):
+    '''
+    Prints a menu with a list of options.
+    :param list: A list of options to be printed in the menu.
+    :return: The option chosen by the user.
+    '''
+    header('MENU')
+    c = 1
+    for item in list:
+        print(f'[{c}] {item}')
+        c += 1
+    print(line())
+    option = int(input('Sua opção: '))
+    return option
