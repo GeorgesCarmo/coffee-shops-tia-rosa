@@ -29,3 +29,16 @@ def menu(list):
     print(line())
     option = int(input('Sua opção: '))
     return option
+
+def readFloat(msg):
+    """
+    Reads a float from the user.
+    :param msg: The message to be displayed to the user.
+    :return: The float entered by the user.
+    """
+    while True:
+        value = str(input(msg)).replace(',', '.').strip()
+        if value.isalpha() or value == '':
+            print(f'\033[0;31mERRO! "{value}" é um preço inválido.\033[m')
+        else:
+            return float(value)

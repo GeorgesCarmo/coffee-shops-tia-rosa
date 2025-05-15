@@ -1,0 +1,4 @@
+Georges;pão de queijo;5.5
+Luana;Pingado;1.5
+Vitor;Bolo;14.5
+Raimunda;Tapioca;9.55
