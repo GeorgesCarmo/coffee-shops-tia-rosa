@@ -1,0 +1,4 @@
+Georges;georges@email.com;61 99999-9999;Rua dos bites, 111 - world wide web
+Luana Silva;luana@email.com;61 88888-8888;Av. protocolo http, 80 - world wide web
+Maria da Silva;maria.silva@email.com;61 77777-7777;Av protocolo https, 443 - world wide web
+João da Silva;joão.silva@email.com;61 66666-6666;Rua ssh, 22 - Ethernet

@@ -1,0 +1,2 @@
+Tapioca;Goma de tapioca;7.99;DISPONIVEL
+Bolo de milho;Leite, ovos, farinha, margarina, milho;19.99;INDISPONIVEL

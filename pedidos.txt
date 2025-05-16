@@ -1,4 +1,6 @@
-Georges;pão de queijo;5.5
-Luana;Pingado;1.5
-Vitor;Bolo;14.5
-Raimunda;Tapioca;9.55
+Georges;pão de queijo;5.5;ATENDIDO
+Luana;Pingado;1.5;ATENDIDO
+Vitor;Bolo;14.5;PENDENTE
+Raimunda;Tapioca;9.55;PENDENTE
+Maria;Biscoito;5.5;PENDENTE
+João;Bolacha;9.99;PENDENTE
