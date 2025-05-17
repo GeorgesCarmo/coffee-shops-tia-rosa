@@ -27,7 +27,7 @@ def menu(list):
         print(f'[{c}] {item}')
         c += 1
     print(line())
-    option = int(input('Sua opção: '))
+    option = readInt('Sua opção: ')
     return option
 
 def readFloat(msg):
@@ -42,3 +42,37 @@ def readFloat(msg):
             print(f'\033[0;31mERRO! "{value}" é um preço inválido.\033[m')
         else:
             return float(value)
+
+def readInt(msg):
+    while True:
+        try:
+            n = int(input(msg))
+        except (ValueError, TypeError):
+            print('\033[31mERRO! Por favor, digite um número inteiro!\033[m')
+            continue
+        except KeyboardInterrupt:
+            print('\033[31mUsuário preferiu parar o programa!\033[m')
+            return 0
+        else:
+            return n
+
+def errorMessage(msg):
+    """
+    Prints an error message.
+    :param msg: The error message to be printed.
+    """
+    print(f'\033[0;31m{msg}\033[m')
+
+def successMessage(msg):
+    """
+    Prints a success message.
+    :param msg: The success message to be printed.
+    """
+    print(f'\033[0;32m{msg}\033[m')
+
+def warningMessage(msg):
+    """
+    Prints a warning message.
+    :param msg: The warning message to be printed.
+    """
+    print(f'\033[0;33m{msg}\033[m')

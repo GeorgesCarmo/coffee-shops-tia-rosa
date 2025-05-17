@@ -1,3 +1,4 @@
+from lib.interface import *
 
 def archiveExists(archiveName):
     '''
@@ -36,20 +37,19 @@ def addOrder(archiveName, customerName, order, price):
     '''
     newOrder = f'{customerName};{order};{price};PENDENTE\n'
     with open(archiveName, 'r') as f:
-        linhas = f.readlines()
+        lines = f.readlines()
 
-    for i in range(len(linhas)):
-        if linhas[i].startswith("---"):
-            linhas[i] = newOrder
+    for i in range(len(lines)):
+        if lines[i].startswith("---"):
+            lines[i] = newOrder
             break
     else:
-        # Nenhuma linha "vazia", adiciona no final
-        linhas.append(newOrder)
+        lines.append(newOrder)
 
     with open(archiveName, 'w') as f:
-        f.writelines(linhas)
-
-    print("Pedido adicionado com sucesso.")
+        f.writelines(lines)
+    print(line())    
+    successMessage("Pedido adicionado com sucesso.")
 
 def listOrders(archiveName):
     '''
@@ -65,7 +65,7 @@ def listOrders(archiveName):
         for line in a:
             data = line.split(';')
             data[2] = data[2].replace('\n', '')
-            print(f'{c} - {data[0]:<10}  {data[1]:<15}  R${data[2]:<4} -> {data[3]}')
+            print(f'{c} - {data[0]:<10}  {data[1]:<15}  R${data[2]:<5} -> {data[3]}')
             c += 1
         a.close()
     finally:
@@ -82,7 +82,7 @@ def listPendingOrders(archiveName):
     for i, linha in enumerate(linhas):
         dados = linha.strip().split(";")
         if len(dados) >= 4 and dados[3] == "PENDENTE":
-            print(f"N. pedido: {i} - {dados[0]:<10}  {dados[1]:<15}  R${dados[2]:<4} -> {dados[3]}")
+            print(f"N. pedido: {i} - {dados[0]:<10}  {dados[1]:<15}  R${dados[2]:<5} -> {dados[3]}")
 
 def executeOrder(archiveName, index):
     '''
@@ -94,7 +94,7 @@ def executeOrder(archiveName, index):
         linhas = f.readlines()
 
     if index < 0 or index >= len(linhas):
-        print("Índice fora do intervalo do arquivo.")
+        errorMessage("Número de pedido inválido.")
         return
 
     dados = linhas[index].strip().split(";")
@@ -107,8 +107,8 @@ def executeOrder(archiveName, index):
 
     with open(archiveName, 'w') as f:
         f.writelines(linhas)
-
-    print(f"Pedido da linha {index} marcado como ATENDIDO.")
+    print(line())
+    successMessage(f'Pedido N. {index}, cliente {dados[0]}, atendido com sucesso!')
 
 def addMenuItem(archiveName, itemName, ingredients, price):
     '''
@@ -121,7 +121,8 @@ def addMenuItem(archiveName, itemName, ingredients, price):
     newItem = f'{itemName};{ingredients};{price};DISPONIVEL\n'
     with open(archiveName, 'a') as f:
         f.write(newItem)
-    print("Item adicionado ao cardápio com sucesso.")
+    print(line())    
+    successMessage("Item adicionado ao cardápio com sucesso.")
 
 def listMenu(archiveName):
     '''
@@ -131,7 +132,7 @@ def listMenu(archiveName):
     try:
         a = open(archiveName, 'rt')
     except Exception as e:
-        print(f'Erro ao abrir o arquivo: {e}')
+        errorMessage(f'Erro ao abrir o arquivo: {e}')
     else:
         c = 0
         for line in a:
@@ -153,7 +154,7 @@ def disableMenuItem(archiveName, index):
         linhas = f.readlines()
 
     if index < 0 or index >= len(linhas):
-        print("Índice fora do intervalo do arquivo.")
+        errorMessage("Índice fora do intervalo do arquivo.")
         return
 
     dados = linhas[index].strip().split(";")
@@ -167,7 +168,7 @@ def disableMenuItem(archiveName, index):
     with open(archiveName, 'w') as f:
         f.writelines(linhas)
 
-    print(f"Item da linha {index} marcado como INDISPONIVEL.")
+    successMessage(f"Item da linha {index} marcado como INDISPONIVEL.")
 
 def addCustomer(archiveName, customerName, customerEmail, customerPhone, customerAddress):
     '''
@@ -181,7 +182,8 @@ def addCustomer(archiveName, customerName, customerEmail, customerPhone, custome
     newCustomer = f'{customerName};{customerEmail};{customerPhone};{customerAddress}\n'
     with open(archiveName, 'a') as f:
         f.write(newCustomer)
-    print(f'Cliente {customerName} adicionado com sucesso!') 
+    print(line())    
+    successMessage(f'Cliente {customerName} adicionado com sucesso!') 
 
 def listCustomers(archiveName):
     '''

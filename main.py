@@ -35,8 +35,9 @@ while True:
                 archive.listPendingOrders(archiveOrder)
             elif response == 4:
                 interface.header('ATENDER PEDIDO')
-                archive.listOrders(archiveOrder)
-                orderNumber = int(input('Número do pedido a ser atendido: '))
+                archive.listPendingOrders(archiveOrder)
+                print(interface.line())
+                orderNumber = interface.readInt('Número do pedido a ser atendido: ')
                 archive.executeOrder(archiveOrder, orderNumber)
             elif response == 5:
                 print('Voltar')
@@ -83,4 +84,4 @@ while True:
         print('Sair')
         break
     else:
-        print('Opção inválida. Tente novamente.')
+        interface.errorMessage('Opção inválida. Tente novamente.')
