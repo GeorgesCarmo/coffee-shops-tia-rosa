@@ -27,7 +27,7 @@ def menu(list):
         print(f'[{c}] {item}')
         c += 1
     print(line())
-    option = readInt('Sua opção: ')
+    option = readInt('\033[0;33mSua opção: \033[m')
     return option
 
 def readFloat(msg):
@@ -48,10 +48,10 @@ def readInt(msg):
         try:
             n = int(input(msg))
         except (ValueError, TypeError):
-            print('\033[31mERRO! Por favor, digite um número inteiro!\033[m')
+            errorMessage('ERRO! Por favor, digite um número inteiro!')
             continue
         except KeyboardInterrupt:
-            print('\033[31mUsuário preferiu parar o programa!\033[m')
+            errorMessage('Usuário preferiu parar o programa!')
             return 0
         else:
             return n

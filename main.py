@@ -37,10 +37,11 @@ while True:
                 interface.header('ATENDER PEDIDO')
                 archive.listPendingOrders(archiveOrder)
                 print(interface.line())
-                orderNumber = interface.readInt('Número do pedido a ser atendido: ')
+                orderNumber = interface.readInt('\033[0;33mNúmero do pedido a ser atendido: \033[m')
                 archive.executeOrder(archiveOrder, orderNumber)
             elif response == 5:
-                print('Voltar')
+                print(interface.line())
+                interface.successMessage('Retornar ao menu principal')
                 break
     elif response == 2:
         interface.header('CARDÁPIO')
@@ -58,10 +59,11 @@ while True:
             if response == 3:
                 interface.header('DESATIVAR ITEM DO CARDÁPIO')
                 archive.listMenu(archiveMenu)
-                itemNumber = int(input('Número do item a ser desativado: '))
+                itemNumber = int(input('\033[0;33mNúmero do item a ser desativado: \033[m'))
                 archive.disableMenuItem(archiveMenu, itemNumber)
             if response == 4:
-                print('Voltar')
+                print(interface.line())
+                interface.successMessage('Retornar ao menu principal')
                 break        
     elif response == 3:
         interface.header('CLIENTES')
@@ -78,10 +80,12 @@ while True:
                 interface.header('LISTA DE CLIENTES')
                 archive.listCustomers(archiveCustomer)
             elif response == 3:
-                print('Voltar')
+                print(interface.line())
+                interface.successMessage('Retornar ao menu principal')
                 break
     elif response == 4:
-        print('Sair')
+        print(interface.line())
+        interface.warningMessage('SAINDO... MUITO OBRIGADO!')
         break
     else:
         interface.errorMessage('Opção inválida. Tente novamente.')

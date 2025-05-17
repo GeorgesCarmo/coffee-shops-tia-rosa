@@ -1,4 +1,5 @@
 from lib.interface import *
+import datetime
 
 def archiveExists(archiveName):
     '''
@@ -35,7 +36,9 @@ def addOrder(archiveName, customerName, order, price):
     :param order: Pedido do cliente
     :param price: Preço do pedido
     '''
-    newOrder = f'{customerName};{order};{price};PENDENTE\n'
+    currentDate = datetime.datetime.now()
+    date = currentDate.strftime("%d/%m/%Y %H:%M:%S")
+    newOrder = f'{customerName};{order};{price};PENDENTE;{date}\n'
     with open(archiveName, 'r') as f:
         lines = f.readlines()
 
@@ -64,8 +67,8 @@ def listOrders(archiveName):
         c = 0
         for line in a:
             data = line.split(';')
-            data[2] = data[2].replace('\n', '')
-            print(f'{c} - {data[0]:<10}  {data[1]:<15}  R${data[2]:<5} -> {data[3]}')
+            data[3] = data[3].replace('\n', '')
+            print(f'{c:<2} - {data[0]:<10}  {data[1]:<15}  R${data[2]:<5} -> {data[3]} - {data[4]}')
             c += 1
         a.close()
     finally:
@@ -77,12 +80,12 @@ def listPendingOrders(archiveName):
     :param archiveName: Nome do arquivo onde os pedidos estão armazenados
     '''
     with open(archiveName, 'r') as f:
-        linhas = f.readlines()
+        lines = f.readlines()
 
-    for i, linha in enumerate(linhas):
-        dados = linha.strip().split(";")
-        if len(dados) >= 4 and dados[3] == "PENDENTE":
-            print(f"N. pedido: {i} - {dados[0]:<10}  {dados[1]:<15}  R${dados[2]:<5} -> {dados[3]}")
+    for i, line in enumerate(lines):
+        data = line.strip().split(";")
+        if len(data) >= 4 and data[3] == "PENDENTE":
+            print(f"N. pedido: {i:<2} - {data[0]:<10}  {data[1]:<15}  R${data[2]:<5} -> \033[0;31m{data[3]}\033[m - {data[4]}")
 
 def executeOrder(archiveName, index):
     '''
@@ -91,24 +94,24 @@ def executeOrder(archiveName, index):
     :param order: Pedido a ser removido
     '''
     with open(archiveName, 'r') as f:
-        linhas = f.readlines()
+        lines = f.readlines()
 
-    if index < 0 or index >= len(linhas):
+    if index < 0 or index >= len(lines):
         errorMessage("Número de pedido inválido.")
         return
 
-    dados = linhas[index].strip().split(";")
-    if len(dados) < 4:
-        dados.append("ATENDIDO")
+    data = lines[index].strip().split(";")
+    if len(data) < 4:
+        data.append("ATENDIDO")
     else:
-        dados[3] = "ATENDIDO"
+        data[3] = "ATENDIDO"
 
-    linhas[index] = ";".join(dados) + "\n"
+    lines[index] = ";".join(data) + "\n"
 
     with open(archiveName, 'w') as f:
-        f.writelines(linhas)
+        f.writelines(lines)
     print(line())
-    successMessage(f'Pedido N. {index}, cliente {dados[0]}, atendido com sucesso!')
+    successMessage(f'Pedido N. {index}, cliente {data[0]}, atendido com sucesso!')
 
 def addMenuItem(archiveName, itemName, ingredients, price):
     '''
@@ -151,22 +154,22 @@ def disableMenuItem(archiveName, index):
     :param index: Índice do item a ser desativado
     '''
     with open(archiveName, 'r') as f:
-        linhas = f.readlines()
+        lines = f.readlines()
 
-    if index < 0 or index >= len(linhas):
+    if index < 0 or index >= len(lines):
         errorMessage("Índice fora do intervalo do arquivo.")
         return
 
-    dados = linhas[index].strip().split(";")
-    if len(dados) < 4:
-        dados.append("INDISPONIVEL")
+    data = lines[index].strip().split(";")
+    if len(data) < 4:
+        data.append("INDISPONIVEL")
     else:
-        dados[3] = "INDISPONIVEL"
+        data[3] = "INDISPONIVEL"
 
-    linhas[index] = ";".join(dados) + "\n"
+    lines[index] = ";".join(data) + "\n"
 
     with open(archiveName, 'w') as f:
-        f.writelines(linhas)
+        f.writelines(lines)
 
     successMessage(f"Item da linha {index} marcado como INDISPONIVEL.")
 
@@ -193,7 +196,7 @@ def listCustomers(archiveName):
     try:
         a = open(archiveName, 'rt')
     except Exception as e:
-        print(f'Erro ao abrir o arquivo: {e}')
+        errorMessage(f'Erro ao abrir o arquivo: {e}')
     else:
         c = 0
         for line in a:

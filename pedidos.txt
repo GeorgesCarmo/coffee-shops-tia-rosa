@@ -1,9 +1,1 @@
-Georges;pão de queijo;5.5;ATENDIDO
-Luana;Pingado;1.5;ATENDIDO
-Vitor;Bolo;14.5;ATENDIDO
-Raimunda;Tapioca;9.55;ATENDIDO
-Maria;Biscoito;5.5;ATENDIDO
-João;Bolacha;9.99;PENDENTE
-Jose;Macarrão;19.99;PENDENTE
-Carlos;Tapioca;9.99;PENDENTE
-Fabio;Bolo;5.0;PENDENTE
+Georges;Macarrão;15.99;PENDENTE;17/05/2025 17:51:35
