@@ -1,1 +1,2 @@
-Georges;Macarrão;15.99;PENDENTE;17/05/2025 17:51:35
+Georges;Macarrão;15.99;ATENDIDO;17/05/2025 17:51:35
+Maria;Bolo de Milho;7.99;PENDENTE;17/05/2025 20:54:05
