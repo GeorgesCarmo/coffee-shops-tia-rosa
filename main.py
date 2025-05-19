@@ -13,37 +13,44 @@ if not archive.archiveExists(archiveMenu):
 if not archive.archiveExists(archiveCustomer):
     archive.createArchive(archiveCustomer)        
 
-interface.header('Coffee Shops Tia Rosa')
-
 while True:
+    interface.clearScreen()
+    interface.header('Coffee Shops Tia Rosa')
     response = interface.menu(['PEDIDOS', 'CARDÁPIO', 'CLIENTES' ,'SAIR'])
     if response == 1:
+        interface.clearScreen()
         interface.header('PEDIDOS')
         while True:
             response = interface.menu(['Novo Pedido', 'Listar todos os Pedidos', 'Listar Pedidos Pendentes', 'Atender Pedido' ,'Voltar'])
             if response == 1:
+                interface.clearScreen()
                 interface.header('NOVO PEDIDO')
                 customerName = input('Nome do cliente: ')
                 order = input('Pedido: ')
                 price = interface.readFloat('Preço: R$ ')
                 archive.addOrder(archiveOrder, customerName, order, price)
             elif response == 2:
+                interface.clearScreen()
                 interface.header('LISTA DE PEDIDOS')
                 archive.listOrders(archiveOrder)
             elif response == 3:
+                interface.clearScreen()
                 interface.header('PEDIDOS PENDENTES')
                 archive.listPendingOrders(archiveOrder)
             elif response == 4:
+                interface.clearScreen()
                 interface.header('ATENDER PEDIDO')
                 archive.listPendingOrders(archiveOrder)
                 print(interface.line())
                 orderNumber = interface.readInt('\033[0;33mNúmero do pedido a ser atendido: \033[m')
                 archive.executeOrder(archiveOrder, orderNumber)
             elif response == 5:
+                interface.clearScreen()
                 print(interface.line())
                 interface.successMessage('Retornar ao menu principal')
                 break
     elif response == 2:
+        interface.clearScreen()
         interface.header('CARDÁPIO')
         while True:
             response = interface.menu(['Novo Item do Cardápio', 'Listar Itens do Cardápio', 'Desativar Item do Cardápio' ,'Voltar'])
@@ -66,6 +73,7 @@ while True:
                 interface.successMessage('Retornar ao menu principal')
                 break        
     elif response == 3:
+        interface.clearScreen()
         interface.header('CLIENTES')
         while True:
             response = interface.menu(['Novo Cliente', 'Listar Clientes', 'Voltar'])
@@ -77,6 +85,7 @@ while True:
                 customerAddress = input('Endereço do cliente: ')
                 archive.addCustomer(archiveCustomer, customerName, customerEmail, customerPhone, customerAddress)
             elif response == 2:
+                interface.clearScreen()
                 interface.header('LISTA DE CLIENTES')
                 archive.listCustomers(archiveCustomer)
             elif response == 3:

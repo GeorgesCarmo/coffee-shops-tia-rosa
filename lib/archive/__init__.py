@@ -68,7 +68,7 @@ def listOrders(archiveName):
         for line in a:
             data = line.split(';')
             data[3] = data[3].replace('\n', '')
-            print(f'{c:<2} - {data[0]:<10}  {data[1]:<15}  R${data[2]:<5} -> {data[3]} - {data[4]}')
+            print(f'{c:<2} - {data[0]:<10}  {data[1]:<20}  R${data[2]:<5} -> {data[3]} - {data[4]}')
             c += 1
         a.close()
     finally:
@@ -85,7 +85,7 @@ def listPendingOrders(archiveName):
     for i, line in enumerate(lines):
         data = line.strip().split(";")
         if len(data) >= 4 and data[3] == "PENDENTE":
-            print(f"N. pedido: {i:<2} - {data[0]:<10}  {data[1]:<15}  R${data[2]:<5} -> \033[0;31m{data[3]}\033[m - {data[4]}")
+            print(f"N. pedido: {i:<2} - {data[0]:<10}  {data[1]:<20}  R${data[2]:<5} -> \033[0;31m{data[3]}\033[m - {data[4]}")
 
 def executeOrder(archiveName, index):
     '''
