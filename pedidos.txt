@@ -1,2 +1,4 @@
 Georges;Macarrão;15.99;ATENDIDO;17/05/2025 17:51:35
-Maria;Bolo de Milho;7.99;PENDENTE;17/05/2025 20:54:05
+Maria;Bolo de Milho;7.99;ATENDIDO;17/05/2025 20:54:05
+Vitor;Tapioca de frango;8.99;PENDENTE;19/05/2025 10:31:59
+Jose;Pão de queijo;5.0;PENDENTE;19/05/2025 10:35:20

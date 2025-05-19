@@ -1,3 +1,5 @@
+import os
+
 def line(size = 42):
     """
     Returns a line of dashes of a given size.
@@ -29,6 +31,12 @@ def menu(list):
     print(line())
     option = readInt('\033[0;33mSua opção: \033[m')
     return option
+
+def clearScreen():
+    """
+    Clears the screen.
+    """
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 def readFloat(msg):
     """
